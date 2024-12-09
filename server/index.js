@@ -174,17 +174,12 @@ const userAuth = (req,res,next) => {
 // frontend token sent
 
 app.get('/router/authcontext',(req,res) => {
-    console.log("I am Triggered")
     const token = req.cookies.jwt;
-    console.log("I am triggered",token)
     if(token) {
         jwt.verify(token,"helloiamnewincoding", (err,user) => {
-            console.log("I am Triggered")
             if(err) {
                 return res.status(403).json({message:"You are not user of this"});
             }
-            console.log(user)
-            console.log("I am Triggered 2")
             req.user = user;
             res.status(200).json({tokens:token,users:user})
         });
